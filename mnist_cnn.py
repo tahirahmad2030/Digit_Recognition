@@ -1,4 +1,6 @@
 #This work creates CNN and learns to recognise digits from images. The dataset used is MNIST  
+#Data is to be downloaded and extracted manually from http://yann.lecun.com/exdb/mnist/
+
 import os
 import struct
 import numpy as np
@@ -89,7 +91,7 @@ x_image = tf.reshape(x, [-1,28,28,1])
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
 
-
+#Hidden
 W_conv2 = weight_variable([5, 5, 32, 64])
 b_conv2 = bias_variable([64])
 h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
@@ -115,7 +117,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 sess.run(tf.initialize_all_variables())
 
 
-for i in range(500):
+for i in range(100):
   batch = get_next(i,50)
   if i%1 == 0:
     train_accuracy = accuracy.eval(feed_dict={x : batch[0], y_ : batch[1], keep_prob : 1.0})
@@ -124,3 +126,5 @@ for i in range(500):
 
 # Accuracy Testing
 print("test accuracy %g"%accuracy.eval(feed_dict={x: test_images, y_:test_labels , keep_prob: 1.0}))
+
+
